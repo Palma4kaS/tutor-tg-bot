@@ -1,0 +1,14 @@
+.deploy/
+__pycache__
+venv
+myenv
+tutor_bot.db
+.env
+tutors/
+.cursor/
+logs/
+backend.log
+uvicorn.log
+*.db
+miniapp/backend/bots_config.py
+node_modules/

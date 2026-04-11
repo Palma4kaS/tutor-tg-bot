@@ -1,0 +1,7 @@
+# Маппинг bot_token -> tutor_folder для поддержки нескольких ботов.
+# Скопируй этот файл в bots_config.py и заполни реальными токенами:
+#   cp bots_config.py.example bots_config.py
+# Для добавления нового бота используй: python add_bot.py
+BOTS_CONFIG = {
+    '1234567890:AAHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx': 'tutor_123456789',
+}

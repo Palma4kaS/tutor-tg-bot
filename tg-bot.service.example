@@ -1,0 +1,16 @@
+[Unit]
+Description=Telegram Bot Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/TelegramBot/RebornTgBot/bot_template
+Environment="PATH=/root/TelegramBot/RebornTgBot/venv/bin"
+ExecStart=/root/TelegramBot/RebornTgBot/venv/bin/python3 /root/TelegramBot/RebornTgBot/bot_template/run.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
