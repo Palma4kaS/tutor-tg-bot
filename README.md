@@ -22,6 +22,15 @@
 - Автогенерация занятий по расписанию
 - Деплой через systemd для стабильной работы на VPS
 
+## Security considerations
+
+- Secrets are stored outside the repository using `.env` files.
+- Each tutor has isolated configuration and database storage.
+- Tutor access is restricted by Telegram ID.
+- Runtime processes are managed through systemd services on VPS.
+- Logs can be inspected through `journalctl` for debugging and basic monitoring.
+- Sensitive runtime files such as bot tokens and SQLite databases are excluded from Git.
+
 ## Стек
 
 | Компонент | Технологии |
