@@ -22,14 +22,14 @@
 - Автогенерация занятий по расписанию
 - Деплой через systemd для стабильной работы на VPS
 
-## Security considerations
+## Безопасность
 
-- Secrets are stored outside the repository using `.env` files.
-- Each tutor has isolated configuration and database storage.
-- Tutor access is restricted by Telegram ID.
-- Runtime processes are managed through systemd services on VPS.
-- Logs can be inspected through `journalctl` for debugging and basic monitoring.
-- Sensitive runtime files such as bot tokens and SQLite databases are excluded from Git.
+- Секреты хранятся вне репозитория через `.env` файлы.
+- Для каждого репетитора используется изолированная конфигурация и отдельная база данных.
+- Доступ репетитора ограничен Telegram ID.
+- Процессы управляются через systemd на VPS.
+- Логи доступны через `journalctl` для отладки и базового мониторинга.
+- Чувствительные файлы (токены ботов, SQLite базы) исключены из Git.
 
 ## Стек
 
@@ -43,19 +43,10 @@
 
 ```
 .
-├── bot_template/          # Общий код бота (используется всеми репетиторами)
-│   ├── app/               # Хэндлеры и клавиатуры
-│   ├── database/          # Менеджер БД
-│   ├── config.py          # Конфигурация
-│   └── run.py             # Точка входа
-├── tutors/                # Папки репетиторов (не в git)
-│   └── tutor_<ID>/        # Данные конкретного репетитора
-│       ├── .env           # Токен и ID
-│       └── tutor_bot.db   # База данных
+├── bot_template/
+├── tutors/
 ├── miniapp/
-│   ├── backend/           # FastAPI backend
-│   └── frontend/          # React frontend
-├── deploy_bot.py          # Создание нового бота
+├── deploy_bot.py
 ├── create_systemd_services.py
 └── run_all_bots.py
 ```
@@ -65,8 +56,8 @@
 ### 1. Клонировать и установить зависимости
 
 ```bash
-git clone https://github.com/Palma4kaS/tutor-rg-bot.git
-cd tutor-rg-bot
+git clone https://github.com/Palma4kaS/tutor-tg-bot.git
+cd tutor-tg-bot
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
@@ -78,67 +69,19 @@ pip install -r requirements.txt
 python3 deploy_bot.py
 ```
 
-Скрипт запросит Telegram ID репетитора и токен бота (получить у [@BotFather](https://t.me/BotFather)).
-Создаст папку `tutors/tutor_<ID>/` с `.env` и базой данных.
-
-### 3. Запустить
-
-**Для разработки:**
-```bash
-python3 run_all_bots.py
-```
-
-**На VPS через systemd:**
-```bash
-python3 create_systemd_services.py
-sudo systemctl daemon-reload
-sudo systemctl enable tg-bot-*.service
-./run_all_bots_systemd.sh start
-```
-
-Управление:
-```bash
-./run_all_bots_systemd.sh status    # Статус всех ботов
-./run_all_bots_systemd.sh restart   # Перезапустить все
-sudo journalctl -u tg-bot-<ID> -f  # Логи конкретного бота
-```
-
 ## Mini App
 
 ### Backend
-
 ```bash
 cd miniapp/backend
-cp bots_config.py.example bots_config.py
-# Заполнить bots_config.py токенами ботов
-cp .env.example .env
-pip install -r requirements.txt
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 ### Frontend
-
 ```bash
 cd miniapp/frontend
-cp .env.example .env
 npm install
 npm run dev
-```
-
-Подробнее: [miniapp/DEPLOY.md](miniapp/DEPLOY.md)
-
-## Добавление нового репетитора
-
-```bash
-python3 deploy_bot.py
-# Выбрать: создать нового бота
-# Ввести Telegram ID и токен бота
-```
-
-После этого добавить токен в `miniapp/backend/bots_config.py`:
-```bash
-cd miniapp/backend
-python3 add_bot.py
 ```
 
 ## Документация
