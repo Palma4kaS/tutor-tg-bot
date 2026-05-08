@@ -52,8 +52,8 @@ pip install -r requirements.txt
 
 # Создаём .env файл
 cat > .env << 'EOF'
-BOT_TOKEN=REDACTED_BOT_TOKEN
-TUTOR_FOLDER=tutor_910518469
+BOT_TOKEN=your_bot_token_here
+TUTOR_FOLDER=tutor_123456789
 CORS_ORIGINS=*
 EOF
 

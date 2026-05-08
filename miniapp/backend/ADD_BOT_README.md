@@ -82,8 +82,8 @@ mkdir -p tutors/tutor_{TUTOR_ID}
 
 ```python
 BOTS_CONFIG = {
-    'REDACTED_BOT_TOKEN': 'tutor_910518469',  # Тестовый бот
-    'REDACTED_BOT_TOKEN': 'tutor_1060996642',  # Бот учителя
+    '1234567890:AAHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx': 'tutor_123456789',  # Первый бот
+    '9876543210:AAHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx': 'tutor_987654321',  # Второй бот
     'НОВЫЙ_ТОКЕН_БОТА': 'tutor_НОВЫЙ_ID',  # Описание
 }
 ```
